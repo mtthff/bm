@@ -73,8 +73,8 @@ list_bookmarks() {
     | awk '
     BEGIN { FS = "|" }
     {
-      printf "* \033[32m%s\033[0m\n", $1
-      printf "  \033[90m%s\033[0m\n", $2
+      printf "* url:\033[1;32m%s\033[0m\n", $1
+      printf "  tags: \033[1;37m%s\033[0m\n", $2
     }' \
     | sed 's/http:\/\///'
   echo
@@ -85,17 +85,16 @@ list_bookmarks() {
 #
 
 search_bookmarks() {
-  echo
+  echo "Results for $1:"
   cat $BOOKMARKS \
     | grep $1 \
     | awk '
     BEGIN { FS = "|" }
     {
-      printf "  \033[32m%s\033[0m\n", $1
-      printf "  \033[90m%s\033[0m\n", $2
+      printf "* url: \033[1;32m%s\033[0m\n", $1
+      printf "  tags: \033[1;37m%s\033[0m\n", $2
     }' \
     | sed 's/http:\/\///'
-  echo
 }
 
 #
