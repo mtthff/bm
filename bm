@@ -48,11 +48,8 @@ usage() {
 EOF
 }
 
-#
 # Add a bookmark
-#
 #   <url> [description] [tag ...]
-#
 
 save_bookmark() {
   local url=$1
@@ -63,7 +60,6 @@ save_bookmark() {
   echo "$url|$tags" >> $BOOKMARKS
 }
 
-#
 # List all bookmarks
 #
 
@@ -80,7 +76,6 @@ list_bookmarks() {
   echo
 }
 
-#
 # Search all bookmarks with <query>
 #
 
@@ -97,7 +92,6 @@ search_bookmarks() {
     | sed 's/http:\/\///'
 }
 
-#
 # Open first bookmark matching <query>
 #
 
@@ -108,7 +102,6 @@ open_bookmark() {
     | xargs open
 }
 
-#
 # Diplay some statistics about the bookmarks
 #
 
@@ -120,7 +113,6 @@ show_statistics() {
   echo "        top 10 tags: `display_top_ten_tags`"
 }
 
-#
 # Output tags.
 #
 
@@ -133,7 +125,6 @@ list_tags() {
     | sort -nr
 }
 
-#
 # Display the 10 most frequently used tags
 #
 
@@ -145,7 +136,6 @@ display_top_ten_tags() {
     | awk '{ printf("%20d  %s\n", $1, $2) }'
 }
 
-#
 # List urls
 #
 
@@ -155,8 +145,6 @@ urls() {
     | cut -d '|' -f 1
 }
 
-
-#
 # Remove all bookmarks
 #
 
