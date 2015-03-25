@@ -1,7 +1,11 @@
 ## BM
 
   Simple bash CLI bookmarks with tag support
-  This is a fork that removes everything
+  This is a fork that removes everything unneccessary.
+  Like DropBox, Previews.
+
+  Also modified default behavior, replaced description with date field.
+
 
 ## Install
 
@@ -42,9 +46,6 @@ Commands:
   $ bm list
   $ bm ls
   $ bm
-
-  # clear all bookmarks
-  $ bm clear
 
 Options:
 

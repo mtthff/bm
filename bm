@@ -37,9 +37,6 @@ usage() {
     $ bm statistics
     $ bm stats
 
-    # clear all bookmarks
-    $ bm clear
-
   Options:
 
      -V, --version   output bm version
