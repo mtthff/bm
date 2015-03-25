@@ -54,10 +54,12 @@ EOF
 save_bookmark() {
   local url=$1
   local tags=${@:2}
+  local date=$(date +%FT%H:%M:%S%z)
   echo "  Added bookmark"
   echo "    url: $url"
   echo "    tags: $tags"
-  echo "$url|$tags" >> $BOOKMARKS
+  echo "    date: $date"
+  echo "$url|$tags|$date" >> $BOOKMARKS
 }
 
 # List all bookmarks
@@ -65,15 +67,14 @@ save_bookmark() {
 
 list_bookmarks() {
   echo
-  cat $BOOKMARKS \
+  cat $BOOKMARKS | head -${1:-10} \
     | awk '
     BEGIN { FS = "|" }
     {
-      printf "* url:\033[1;32m%s\033[0m\n", $1
+      printf "* url: \033[1;32m%s\033[0m\n", $1
       printf "  tags: \033[1;37m%s\033[0m\n", $2
-    }' \
-    | sed 's/http:\/\///'
-  echo
+      printf "  date: %s\n\n", $3
+    }'
 }
 
 # Search all bookmarks with <query>
@@ -81,6 +82,7 @@ list_bookmarks() {
 
 search_bookmarks() {
   echo "Results for $1:"
+  echo
   cat $BOOKMARKS \
     | grep $1 \
     | awk '
@@ -88,8 +90,8 @@ search_bookmarks() {
     {
       printf "* url: \033[1;32m%s\033[0m\n", $1
       printf "  tags: \033[1;37m%s\033[0m\n", $2
-    }' \
-    | sed 's/http:\/\///'
+      printf "  date: %s\n\n", $3
+    }'
 }
 
 # Open first bookmark matching <query>
@@ -155,7 +157,7 @@ clear_bookmarks() {
 # no args
 
 if test $# -eq 0; then
-  list_bookmarks
+  list_bookmarks 10
   exit
 fi
 
@@ -167,12 +169,12 @@ while test $# -ne 0; do
     -V|--version) echo $VERSION; exit ;;
     -h|--help) usage; exit ;;
     tags) list_tags; exit ;;
-    ls|list) list_bookmarks; exit ;;
+    ls|list) list_bookmarks "$@"; exit ;;
     search) search_bookmarks "$@"; exit ;;
     open) open_bookmark "$@"; exit ;;
     add) save_bookmark "$@"; exit ;;
     stats|statistics) show_statistics; exit ;;
     clear) clear_bookmarks; exit ;;
-    *) open_bookmark $arg; exit ;;
+    *) list_bookmarks $arg; exit ;;
   esac
 done
