@@ -147,13 +147,6 @@ urls() {
     | cut -d '|' -f 1
 }
 
-# Remove all bookmarks
-#
-
-clear_bookmarks() {
-  rm $BOOKMARKS
-}
-
 # no args
 
 if test $# -eq 0; then
@@ -174,7 +167,6 @@ while test $# -ne 0; do
     open) open_bookmark "$@"; exit ;;
     add) save_bookmark "$@"; exit ;;
     stats|statistics) show_statistics; exit ;;
-    clear) clear_bookmarks; exit ;;
     *) list_bookmarks $arg; exit ;;
   esac
 done
