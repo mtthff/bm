@@ -52,11 +52,13 @@ save_bookmark() {
   local url=$1
   local tags=${@:2}
   local date=$(date +%FT%H:%M:%S%z)
+  local title=$(curl "$url" -so -|ggrep -iPo '(?<=<title>)(.*)(?=</title>)'|sed 's#|# #g')
   echo "  Added bookmark"
+  echo "    title: $title"
   echo "    url: $url"
   echo "    tags: $tags"
   echo "    date: $date"
-  echo "$url|$tags|$date" >> $BOOKMARKS
+  echo "$url|$tags|$date|$title" >> $BOOKMARKS
 }
 
 # List all bookmarks
@@ -68,7 +70,8 @@ list_bookmarks() {
     | awk '
     BEGIN { FS = "|" }
     {
-      printf "* url: \033[1;32m%s\033[0m\n", $1
+      printf "* title: \033[1;32m%s\033[0m\n", $4
+      printf "  url: %s\n", $1
       printf "  tags: \033[1;37m%s\033[0m\n", $2
       printf "  date: %s\n\n", $3
     }'
@@ -85,7 +88,8 @@ search_bookmarks() {
     | awk '
     BEGIN { FS = "|" }
     {
-      printf "* url: \033[1;32m%s\033[0m\n", $1
+      printf "* title: \033[1;32m%s\033[0m\n", $4
+      printf "  url: %s\n", $1
       printf "  tags: \033[1;37m%s\033[0m\n", $2
       printf "  date: %s\n\n", $3
     }'
