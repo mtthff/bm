@@ -18,20 +18,20 @@ usage() {
     # add a bookmark with the given url and optional tags
     $ bm add <url> [tag...]
 
+    # list bookmarks available
+    $ bm list
+    $ bm ls
+    $ bm
+    $ bm 20
+
     # open the first bookmark matching <query>
     $ bm open <query>
-    $ bm <query>
 
     # search the bookmarks via full-text <query>
     $ bm search <query>
 
     # list tags
     $ bm tags
-
-    # list bookmarks available
-    $ bm list
-    $ bm ls
-    $ bm
 
     # display statistics about the bookmarks
     $ bm statistics
