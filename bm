@@ -64,7 +64,7 @@ save_bookmark() {
 
 list_bookmarks() {
   echo
-  cat $BOOKMARKS | head -${1:-10} \
+  cat $BOOKMARKS | tail -${1:-10} \
     | awk '
     BEGIN { FS = "|" }
     {
@@ -81,7 +81,7 @@ search_bookmarks() {
   echo "Results for $1:"
   echo
   cat $BOOKMARKS \
-    | grep $1 \
+    | grep -i $1 \
     | awk '
     BEGIN { FS = "|" }
     {
