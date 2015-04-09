@@ -20,9 +20,9 @@ $ make uninstall
 
     $ bm add http://subtlepatterns.com design textures
 
-  Open it later:
+  Search for a bookmark:
 
-    $ bm subtle
+    $ bm search noqqe
 
 ## Usage
 
@@ -58,7 +58,7 @@ File Stucture
 
 ```
 $ cat ~/.bookmarks
-https://kippt.com|clean white design
-http://subtlepatterns.com|design textures
-http://www.uiparade.com|design ui
+http://vimeo.com/6200166|bike fixie|2014-08-06T07:36:56Z|One gear No idea on Vimeo
+http://z0r.de/?id=38|Fun|2010-01-24T19:25:36Z|ZOMG ZUFALL! #38
 ```
+
