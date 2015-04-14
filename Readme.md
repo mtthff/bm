@@ -9,6 +9,7 @@
 
 ## Install
 
+Set $HOST, $USER and $BACKUPDIR in the script
 ```
 $ make install
 $ make uninstall
@@ -46,6 +47,12 @@ Commands:
   $ bm list
   $ bm ls
   $ bm
+
+  # send to host
+  $ bm push
+
+  # get from host
+  $ bm pull
 
 Options:
 

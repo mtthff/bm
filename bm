@@ -4,6 +4,11 @@
 VERSION="0.4.2-noqqe"
 # bookmarks file
 BOOKMARKS=~/.bookmarks
+# push/pull
+HOST=""
+USER=""
+BACKUPDIR="" # Make shure, that this directory exist on your host
+
 
 # Output usage info
 #
@@ -36,6 +41,14 @@ usage() {
     # display statistics about the bookmarks
     $ bm statistics
     $ bm stats
+
+    # sync with host
+    # be shure, that you set $HOST, $USER and $BACKUPDIR in script
+    # send to host
+    $ bm push
+
+    # get from host
+    $ bm pull
 
   Options:
 
@@ -148,6 +161,21 @@ urls() {
     | cut -d '|' -f 1
 }
 
+# Push to host
+#
+
+push() {
+   rsync --numeric-ids -avze ssh ~/.bookmarks $USER@$HOST:$BACKUPDIR
+}
+
+# Pull from host
+#
+
+pull() {
+   rsync -avze ssh $USER@$HOST:$BACKUPDIR/.bookmarks ~/
+}
+
+
 # no args
 
 if test $# -eq 0; then
@@ -168,6 +196,8 @@ while test $# -ne 0; do
     open) open_bookmark "$@"; exit ;;
     add) save_bookmark "$@"; exit ;;
     stats|statistics) show_statistics; exit ;;
+    -ps|push) push; exit;;
+    -pl|pull) pull; exit;;
     *) list_bookmarks $arg; exit ;;
   esac
 done
