@@ -7,7 +7,7 @@ BOOKMARKS=~/.bookmarks
 # push/pull
 HOST=""
 USER=""
-BACKUPDIR="" # Make shure, that this directory exist on your host
+BACKUPDIR="" # Make sure, that this directory exist on your host
 
 
 # Output usage info
